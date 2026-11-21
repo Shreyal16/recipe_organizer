@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-bg-canvas: #FAF8F5;
+    --color-bg-card: #FFFFFF;
+    --color-bg-subtle: #F3EFEA;
+    --color-border: #E6E1D8;
+    --color-text-main: #1F2823;
+    --color-text-muted: #64746B;
+
+    --brand-50: #EDF5F0;
+    --brand-100: #D8E9DE;
+    --brand-200: #B4D5BF;
+    --brand-300: #88BD99;
+    --brand-400: #529E6B;
+    --brand-500: #2D6A4F;
+    --brand-600: #1B4332;
+    --brand-700: #143628;
+    --brand-800: #0F2A1F;
+    --brand-900: #0A1C15;
+  }
+
+  .dark {
+    --color-bg-canvas: #0C120F;
+    --color-bg-card: #131C17;
+    --color-bg-subtle: #19251F;
+    --color-border: #24352D;
+    --color-text-main: #E5EBE7;
+    --color-text-muted: #8E9F96;
+
+    --brand-50: #15221B;
+    --brand-100: #1D3026;
+    --brand-200: #274235;
+    --brand-300: #335746;
+    --brand-400: #40715B;
+    --brand-500: #528E73;
+    --brand-600: #68AB8B;
+    --brand-700: #8EC3AA;
+    --brand-800: #B7DDCB;
+    --brand-900: #DEF0E7;
+  }
+
+  body {
+    background-color: var(--color-bg-canvas);
+    color: var(--color-text-main);
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #334155;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}

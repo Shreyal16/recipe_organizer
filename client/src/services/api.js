@@ -2,14 +2,15 @@ import axios from 'axios';
 
 /**
  * Centralized Axios instance.
- * Uses baseURL: '/api' which is forwarded to the backend via Vite proxy in development.
+ * Production uses VITE_API_URL pointing to Render backend (e.g. https://recipe-organizer-api.onrender.com/api).
+ * Development falls back to '/api' for Vite dev proxy.
  */
 const api = axios.create({
-  baseURL: '/api',
+  baseURL: import.meta.env.VITE_API_URL || '/api',
   headers: {
     'Content-Type': 'application/json',
   },
-  timeout: 10000,
+  timeout: 90000, // 90 seconds to tolerate Render free-tier cold starts
 });
 
 // Response interceptor for consistent error extraction
@@ -20,7 +21,6 @@ api.interceptors.response.use(
     let details = null;
 
     if (error.response) {
-      // Backend returned standard error envelope
       if (error.response.data && error.response.data.error) {
         message = error.response.data.error.message || message;
         details = error.response.data.error.details || null;
@@ -28,6 +28,8 @@ api.interceptors.response.use(
         message = 'Requested resource not found.';
       } else if (error.response.status === 500) {
         message = 'Server encountered an internal error. Please try again later.';
+      } else if (error.response.status === 503) {
+        message = 'Service temporarily unavailable. Database connection initializing.';
       }
       return Promise.reject({
         status: error.response.status,
@@ -36,8 +38,11 @@ api.interceptors.response.use(
         isAxiosError: true,
       });
     } else if (error.request) {
-      // Network failure
-      message = 'Unable to reach the server. Please verify your connection or backend status.';
+      if (error.code === 'ECONNABORTED' || error.message?.includes('timeout')) {
+        message = 'The server is currently waking up from sleep. Please wait a moment and refresh.';
+      } else {
+        message = 'Unable to reach the server. Please verify your connection or backend status.';
+      }
       return Promise.reject({
         status: 0,
         message,

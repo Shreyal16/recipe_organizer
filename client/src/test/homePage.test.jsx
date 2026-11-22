@@ -47,8 +47,10 @@ describe('HomePage Component', () => {
     renderWithProviders(<HomePage />);
 
     await waitFor(() => {
-      expect(screen.getByText('Plan Better, Cook Smarter, Eat Fresh.')).toBeInTheDocument();
+      expect(screen.queryByText(/Loading your culinary dashboard/i)).not.toBeInTheDocument();
     });
+
+    expect(screen.getByText('Plan Better, Cook Smarter, Eat Fresh.')).toBeInTheDocument();
 
     // Check CTAs
     expect(screen.getByRole('button', { name: /Explore Recipes/i })).toBeInTheDocument();

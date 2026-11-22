@@ -1,5 +1,13 @@
+import path from 'path';
+import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
+
+// Load .env from process.cwd() or fallback to server/.env relative to this file
 dotenv.config();
+if (!process.env.MONGODB_URI) {
+  const __dirname = path.dirname(fileURLToPath(import.meta.url));
+  dotenv.config({ path: path.resolve(__dirname, '../../.env') });
+}
 
 import { connectDB, disconnectDB, maskMongoUri } from '../config/db.js';
 import { seedRecipes, sampleRecipes } from './seedRecipes.js';

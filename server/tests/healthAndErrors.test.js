@@ -21,6 +21,14 @@ describe('Health Check & Error Handling Endpoints', () => {
     expect(res.body.data.database.connected).toBe(true);
   });
 
+  it('GET /api/health/ready returns 200 when database is connected and responsive', async () => {
+    const res = await request(app).get('/api/health/ready');
+    expect(res.status).toBe(200);
+    expect(res.body.success).toBe(true);
+    expect(res.body.data.status).toBe('ready');
+    expect(res.body.data.database).toBe('connected');
+  });
+
   it('GET /health root alias returns ok status', async () => {
     const res = await request(app).get('/health');
     expect(res.status).toBe(200);

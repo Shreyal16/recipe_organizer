@@ -7,7 +7,8 @@ import { sendError } from '../utils/apiResponse.js';
  */
 export const apiLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: process.env.NODE_ENV === 'test' ? 10000 : 300, // Max 300 requests per 15 minutes in dev/prod
+  max: 300, // Max 300 requests per 15 minutes in dev/prod
+  skip: () => process.env.NODE_ENV === 'test',
   standardHeaders: true,
   legacyHeaders: false,
   handler: (req, res) => {

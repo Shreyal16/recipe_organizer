@@ -177,29 +177,73 @@ Output reports inserted, updated, and skipped recipe counts.
 
 ---
 
-## 8. Available Commands
+## 8. Available Commands & Testing Workflows
 
-Run from `recipe-organizer/`:
-- `npm run dev`: Runs both backend (nodemon) and frontend (Vite) concurrently.
-- `npm run dev:client`: Runs Vite frontend dev server (`http://localhost:5173`).
-- `npm run dev:server`: Runs Express backend with nodemon (`http://localhost:5000`).
-- `npm run build`: Compiles production frontend bundle.
-- `npm run seed`: Executes the database seed runner.
-- `npm run test`: Executes both frontend (jsdom) and backend (node) test suites.
-- `npm run test:client`: Runs Vitest tests in the client workspace.
-- `npm run test:server`: Runs Vitest tests in the server workspace.
-- `npm run test:watch`: Runs Vitest in watch mode.
-- `npm run test:coverage`: Generates code coverage reports for both workspaces.
+All commands can be executed from the monorepo root directory (`recipe-organizer/`):
+
+### Development & Build
+- `npm run dev`: Runs both backend (nodemon on port 5000) and frontend (Vite on port 5173) concurrently.
+- `npm run dev:client`: Runs Vite frontend dev server at `http://localhost:5173`.
+- `npm run dev:server`: Runs Express backend with nodemon at `http://localhost:5000`.
+- `npm run build`: Compiles production frontend bundle using Vite into `client/dist/`.
+- `npm run seed`: Executes the database seed runner against configured MongoDB.
+
+### Automated Testing
+- `npm run test`: Executes the complete test suite across both `client` (jsdom) and `server` (node) workspaces sequentially with strict failure propagation.
+- `npm run test:client`: Runs client-side component and unit tests using Vitest and Testing Library.
+- `npm run test:server`: Runs backend API, model, controller, service, utility, and database integration tests.
+- `npm run test:watch`: Runs Vitest in watch mode across both workspaces concurrently for active development.
+- `npm run test:coverage`: Executes both test suites with V8 coverage enabled, generating detailed tabular reports and HTML artifacts.
 
 ---
 
-## 9. Development Phases Progress
+## 9. Testing Architecture & Quality Assurance
+
+Phase 6 implements a comprehensive automated testing framework covering 103 tests (54 backend tests across 12 suites, and 49 frontend tests across 11 suites) with 100% pass rates.
+
+### Backend Testing & Database Safety
+All backend tests execute in strict database isolation using `mongodb-memory-server` and `mongodb-memory-replSet`:
+- **Zero Cloud Impact**: Tests **never** connect to MongoDB Atlas or any external network database.
+- **Three-Tier Safety Guards**:
+  1. **URI Guard**: Validates that connection string contains strictly `127.0.0.1` or `localhost`.
+  2. **Environment Guard**: Verifies `process.env.MONGODB_URI` points directly to the in-memory instance.
+  3. **Connection Host Guard**: Asserts `mongoose.connection.host` connects to local loopback before test execution.
+- **Multi-Document Transaction Support**: Uses `MongoMemoryReplSet` (single-node replica set) to test real MongoDB ACID transactions during recipe deletion and cascading reference cleanup.
+- **Standalone Fallback Path**: Tests sequential fallback cleanup when transactions are not supported by the underlying MongoDB instance.
+- **Deterministic State Isolation**: Clears all database collections between test cases (`clearTestDb()`) and tears down in-memory instances after suite completion.
+- **Test Environment Adaptation**: Express rate-limiting is automatically bypassed when `NODE_ENV === 'test'` to eliminate false-positive 429 errors during rapid automated test execution.
+
+### Frontend Testing
+- **DOM Simulation**: Vitest running in a `jsdom` environment with `@testing-library/react`.
+- **Environment Mocks**: Recharts `ResponsiveContainer` mock via `React.createElement`, `window.matchMedia`, `ResizeObserver`, and standard API mock fixtures.
+- **User Event Verification**: Tests complete user interactions including form validation, filter debouncing, optimistic state updates and rollback upon API errors, modal lifecycle, and checklist strike-throughs.
+
+### Code Coverage Metrics
+Generated using `@vitest/coverage-v8`:
+- **Client Workspace**: ~80% statement coverage, ~80% line coverage, ~71% branch coverage.
+- **Server Workspace**: ~81% statement coverage, ~81% line coverage, ~86% function coverage, 100% model coverage, 100% route coverage, >95% controller coverage.
+- **Coverage Output Directories**:
+  - `client/coverage/` (interactive HTML report at `client/coverage/index.html`)
+  - `server/coverage/` (interactive HTML report at `server/coverage/index.html`)
+  *(Both coverage folders are excluded from Git version control via `.gitignore`).*
+
+### Troubleshooting Test Runs
+- **EACCES Local Socket Binding on Windows**: In restricted sandbox environments on Windows, child processes spawning ephemeral loopback sockets for `mongodb-memory-server` may encounter `EACCES 127.0.0.1`. Run `npm run test` or `npm run test:coverage` in an unsandboxed terminal with standard network privileges.
+- **Binary Download**: On first run, `mongodb-memory-server` downloads a local platform-specific MongoDB binary cached in the local application data directory. Subsequent test runs use the cached binary offline.
+
+---
+
+## 10. Development Phases Progress
 
 1. **Phase 1: Project Foundation, Architecture and Initial Setup** *(Completed)*
    - Workspace setup, directory scaffolding, build/test tooling, environment templates, and documentation.
 2. **Phase 2: MongoDB, Mongoose and Node.js Backend Development** *(Completed)*
    - Mongoose models (Recipe, Favorite, MealPlan, GroceryList, UserPreference), Zod validation, decoupled Express architecture, REST APIs, business services, seeder with 24 sample recipes, and `API_CONTRACT.md`.
-3. **Phase 3: Backend RESTful API Refinement & Business Logic Optimization** *(Upcoming)*
-4. **Phase 4: Frontend Layout, Routing, and Core UI Components** *(Upcoming)*
-5. **Phase 5: Feature Implementation (Recipe Explorer, Meal Planner, Insights)** *(Upcoming)*
-6. **Phase 6: Testing, Integration, and Polishing** *(Upcoming)*
+3. **Phase 3: React Frontend MVP & Backend Integration** *(Completed)*
+   - Component architecture, Tailwind styling, React Router navigation, dark/light theme toggle, custom hooks, and full API integration.
+4. **Phase 4: Data Integrity Fix & UI Refinement** *(Completed)*
+   - Multi-document transactions for cascading recipe deletion cleanup in Favorites and MealPlans, standalone fallback path, refined Home dashboard, and polished component styling.
+5. **Phase 5: AI Recipe Insights, Personalization & Meal Planner** *(Completed)*
+   - AI-driven pantry recommendation engine, nutrition and cuisine analytics charts with Recharts, interactive pantry management, and `@dnd-kit` drag-and-drop weekly meal planner.
+6. **Phase 6: Comprehensive Testing, Regression and Quality Assurance** *(Completed)*
+   - 103 automated tests (54 backend, 49 frontend), 8 end-to-end integration workflows, in-memory MongoDB replica set transactions, seed idempotency verification, >80% code coverage, deliberate failure propagation verification, multi-viewport responsive checks, and zero secrets exposure.

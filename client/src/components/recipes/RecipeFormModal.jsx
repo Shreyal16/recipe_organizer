@@ -189,7 +189,7 @@ export default function RecipeFormModal({
       title={recipeToEdit ? 'Edit Recipe' : 'Create New Recipe'}
       maxWidth="max-w-3xl"
     >
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form onSubmit={handleSubmit} noValidate className="space-y-6">
         {validationError && (
           <ErrorBanner message={validationError} />
         )}

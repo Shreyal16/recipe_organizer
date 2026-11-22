@@ -159,7 +159,7 @@ export default function PantryPreferencesCard({ onPreferencesSaved }) {
             variant="primary"
             size="sm"
             onClick={handleSave}
-            isLoading={saving}
+            loading={saving}
             disabled={saving}
           >
             Save Preferences

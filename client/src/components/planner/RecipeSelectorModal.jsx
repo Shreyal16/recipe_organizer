@@ -53,7 +53,7 @@ export default function RecipeSelectorModal({
             placeholder="Search recipes..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-9 pr-3.5 py-2 text-sm rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white"
+            className="w-full pl-9 pr-3.5 py-2 text-sm rounded-xl border border-gray-300 placeholder:text-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-500 bg-white"
           />
         </div>
 

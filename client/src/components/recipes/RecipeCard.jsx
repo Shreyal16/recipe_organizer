@@ -45,7 +45,7 @@ export default function RecipeCard({
   return (
     <div className="group bg-white rounded-2xl border border-gray-200/80 shadow-xs hover:shadow-md transition-all duration-200 overflow-hidden flex flex-col h-full">
       {/* Image Container */}
-      <div className="relative aspect-16/10 w-full overflow-hidden bg-gray-100">
+      <div className="relative aspect-[16/10] w-full overflow-hidden bg-gray-100 shrink-0">
         <img
           src={imgSrc}
           alt={recipe.title}
@@ -83,7 +83,7 @@ export default function RecipeCard({
       {/* Content */}
       <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between">
         <div>
-          <div className="flex items-center gap-2 mb-2">
+          <div className="flex items-center gap-2 mb-2 min-h-[1.5rem]">
             <span className="text-xs font-semibold uppercase tracking-wider text-brand-700 bg-brand-50 px-2 py-0.5 rounded-md">
               {recipe.mealType}
             </span>
@@ -95,17 +95,17 @@ export default function RecipeCard({
           </div>
 
           <Link to={`/recipes/${recipe._id}`} className="block focus:outline-none">
-            <h3 className="text-base font-bold text-gray-900 group-hover:text-brand-700 transition-colors line-clamp-1 mb-1.5">
+            <h3 className="text-base font-bold text-gray-900 group-hover:text-brand-700 transition-colors line-clamp-1 mb-1.5 h-6">
               {recipe.title}
             </h3>
-            <p className="text-xs text-gray-500 line-clamp-2 leading-relaxed mb-4">
-              {recipe.description}
+            <p className="text-xs text-gray-500 line-clamp-2 leading-relaxed mb-4 h-9 overflow-hidden">
+              {recipe.description || 'Delicious culinary recipe.'}
             </p>
           </Link>
         </div>
 
         {/* Metadata & Actions */}
-        <div className="pt-3 border-t border-gray-100 flex items-center justify-between">
+        <div className="pt-3 border-t border-gray-100 flex items-center justify-between mt-auto">
           <div className="flex items-center gap-4 text-xs text-gray-500 font-medium">
             <div className="flex items-center gap-1">
               <Clock className="w-3.5 h-3.5 text-gray-400" />

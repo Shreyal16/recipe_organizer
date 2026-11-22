@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2D6A4F" />
+      <stop offset="100%" stop-color="#1B4332" />
+    </linearGradient>
+    <linearGradient id="hatGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="100%" stop-color="#F1F5F9" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F59E0B" />
+      <stop offset="100%" stop-color="#D97706" />
+    </linearGradient>
+  </defs>
+
+  <!-- Squircle Background -->
+  <rect x="2" y="2" width="60" height="60" rx="16" fill="url(#bgGrad)" />
+  <rect x="2" y="2" width="60" height="60" rx="16" fill="none" stroke="#529E6B" stroke-width="1.5" stroke-opacity="0.4" />
+
+  <!-- Steam Waves (Cooking Aroma) -->
+  <path d="M26 12 C24 9 28 7 26 4.5" fill="none" stroke="url(#goldGrad)" stroke-width="2.5" stroke-linecap="round" />
+  <path d="M32 10.5 C30 7.5 34 5.5 32 3" fill="none" stroke="url(#goldGrad)" stroke-width="2.5" stroke-linecap="round" />
+  <path d="M38 12 C36 9 40 7 38 4.5" fill="none" stroke="url(#goldGrad)" stroke-width="2.5" stroke-linecap="round" />
+
+  <!-- Chef Hat Top Puff -->
+  <path d="M20 27 C16 27 15 20 20 16 C20 12 26 11 32 12 C38 11 44 12 44 16 C49 20 48 27 44 27 Z" fill="url(#hatGrad)" />
+  <!-- Chef Hat Base Band -->
+  <rect x="20.5" y="26" width="23" height="5" rx="1.5" fill="#FFFFFF" />
+  <line x1="20.5" y1="31" x2="43.5" y2="31" stroke="#CBD5E1" stroke-width="1" />
+
+  <!-- Cooking Pot Body -->
+  <path d="M16 35 L48 35 C48 35 47 48 32 48 C17 48 16 35 16 35 Z" fill="#FFFFFF" />
+  <!-- Pot Rim -->
+  <rect x="14" y="33" width="36" height="3" rx="1.5" fill="#E2E8F0" />
+  <!-- Pot Handles -->
+  <path d="M16 37 C12 37 11 41 15 42" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" />
+  <path d="M48 37 C52 37 53 41 49 42" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" />
+
+  <!-- Golden Culinary Spark / Star -->
+  <path d="M32 39.5 L33.2 42.2 L36 42.6 L33.8 44.3 L34.5 47 L32 45.4 L29.5 47 L30.2 44.3 L28 42.6 L30.8 42.2 Z" fill="url(#goldGrad)" />
+
+  <!-- Base Shadow -->
+  <ellipse cx="32" cy="54" rx="14" ry="2" fill="#0A1C15" opacity="0.3" />
+</svg>

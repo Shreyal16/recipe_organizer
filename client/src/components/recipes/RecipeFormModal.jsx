@@ -216,7 +216,7 @@ export default function RecipeFormModal({
               placeholder="A brief flavorful overview of this dish..."
               value={formData.description}
               onChange={(e) => handleChange('description', e.target.value)}
-              className="w-full rounded-lg border border-gray-300 px-3.5 py-2 text-sm focus:ring-brand-500 focus:border-brand-500"
+              className="w-full rounded-lg border border-gray-300 px-3.5 py-2 text-sm text-gray-900 placeholder:text-gray-500 focus:ring-brand-500 focus:border-brand-500 bg-white"
             />
           </div>
 
@@ -334,7 +334,7 @@ export default function RecipeFormModal({
                   required
                   value={ing.name}
                   onChange={(e) => handleIngredientChange(idx, 'name', e.target.value)}
-                  className="flex-3 rounded-lg border border-gray-300 px-3 py-1.5 text-xs focus:ring-brand-500 focus:border-brand-500"
+                  className="flex-3 rounded-lg border border-gray-300 px-3 py-1.5 text-xs text-gray-900 placeholder:text-gray-500 focus:ring-brand-500 focus:border-brand-500 bg-white"
                 />
                 <input
                   type="number"
@@ -342,14 +342,14 @@ export default function RecipeFormModal({
                   placeholder="Qty"
                   value={ing.quantity}
                   onChange={(e) => handleIngredientChange(idx, 'quantity', e.target.value)}
-                  className="flex-1 rounded-lg border border-gray-300 px-3 py-1.5 text-xs focus:ring-brand-500 focus:border-brand-500"
+                  className="flex-1 rounded-lg border border-gray-300 px-3 py-1.5 text-xs text-gray-900 placeholder:text-gray-500 focus:ring-brand-500 focus:border-brand-500 bg-white"
                 />
                 <input
                   type="text"
                   placeholder="Unit (g, ml, cup)"
                   value={ing.unit}
                   onChange={(e) => handleIngredientChange(idx, 'unit', e.target.value)}
-                  className="flex-1.5 rounded-lg border border-gray-300 px-3 py-1.5 text-xs focus:ring-brand-500 focus:border-brand-500"
+                  className="flex-1.5 rounded-lg border border-gray-300 px-3 py-1.5 text-xs text-gray-900 placeholder:text-gray-500 focus:ring-brand-500 focus:border-brand-500 bg-white"
                 />
                 <button
                   type="button"
@@ -391,7 +391,7 @@ export default function RecipeFormModal({
                   placeholder={`Step ${ins.step} description...`}
                   value={ins.text}
                   onChange={(e) => handleInstructionChange(idx, e.target.value)}
-                  className="flex-1 rounded-lg border border-gray-300 px-3 py-1.5 text-xs focus:ring-brand-500 focus:border-brand-500"
+                  className="flex-1 rounded-lg border border-gray-300 px-3 py-1.5 text-xs text-gray-900 placeholder:text-gray-500 focus:ring-brand-500 focus:border-brand-500 bg-white"
                 />
                 <button
                   type="button"

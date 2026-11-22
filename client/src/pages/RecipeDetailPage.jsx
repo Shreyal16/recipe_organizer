@@ -177,7 +177,7 @@ export default function RecipeDetailPage() {
 
       {/* Hero Card */}
       <div className="bg-white rounded-3xl border border-gray-200/80 shadow-xs overflow-hidden">
-        <div className="relative aspect-16/9 sm:aspect-21/9 w-full bg-gray-100 overflow-hidden">
+        <div className="relative aspect-video sm:aspect-[21/9] w-full bg-gray-100 overflow-hidden">
           <img
             src={recipe.imageUrl || DEFAULT_RECIPE_IMAGE}
             alt={recipe.title}

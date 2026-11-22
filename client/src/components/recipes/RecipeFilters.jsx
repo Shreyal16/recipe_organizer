@@ -52,7 +52,7 @@ export default function RecipeFilters({
             placeholder="Search recipes..."
             value={filters.q || ''}
             onChange={(e) => handleTextChange('q', e.target.value)}
-            className="w-full pl-9 pr-3.5 py-2 text-sm rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-500 bg-gray-50/50 hover:bg-white transition-colors"
+            className="w-full pl-9 pr-3.5 py-2 text-sm rounded-xl border border-gray-300 placeholder:text-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-brand-500 bg-gray-50/50 hover:bg-white transition-colors"
           />
         </div>
 
@@ -145,7 +145,7 @@ export default function RecipeFilters({
               placeholder="e.g. tomato, paneer, garlic"
               value={filters.ingredients || ''}
               onChange={(e) => handleTextChange('ingredients', e.target.value)}
-              className="w-full px-3 py-1.5 text-xs rounded-lg border border-gray-300 focus:ring-brand-500 focus:border-brand-500"
+              className="w-full px-3 py-1.5 text-xs rounded-lg border border-gray-300 placeholder:text-gray-500 text-gray-900 focus:ring-brand-500 focus:border-brand-500 bg-white"
             />
             {/* Match Strategy Toggle */}
             <div className="flex items-center gap-3 mt-2 text-xs text-gray-600">

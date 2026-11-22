@@ -38,7 +38,7 @@ const Input = forwardRef(
             type={type}
             className={`
               block w-full rounded-lg text-sm text-gray-900 border transition-all duration-150
-              placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-0
+              placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-0
               ${Icon ? 'pl-9 pr-3.5 py-2' : 'px-3.5 py-2'}
               ${
                 error
